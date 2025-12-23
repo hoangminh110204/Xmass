@@ -30,19 +30,11 @@
       background: #ff6f91;
       border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    .envelope:hover {
-      transform: scale(1.03);
     }
 
     .flap {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: #ff4f7a;
       clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
       border-radius: 12px;
@@ -62,21 +54,21 @@
 
     /* ===== LETTER ===== */
     .letter {
-      position: absolute;
-      bottom: 20px;
+      position: fixed;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%) scale(0);
+      transform: translate(-50%, -50%) scale(0);
       width: 85vw;
       max-width: 340px;
-      height: 420px;
+      height: min(80vh, 460px);
       background: url("bg-pink-christmas.jpg") center/cover no-repeat;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 24px;
       text-align: center;
       color: #fff;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      z-index: 2;
-      transition: all 0.6s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      z-index: 10;
+      transition: transform 0.6s ease;
       overflow: hidden;
     }
 
@@ -85,7 +77,6 @@
       position: absolute;
       inset: 0;
       background: rgba(255, 105, 135, 0.7);
-      z-index: 0;
     }
 
     .letter-content {
@@ -94,7 +85,7 @@
     }
 
     .letter h1 {
-      margin-top: 30px;
+      margin-top: 20px;
       font-size: 1.8rem;
     }
 
@@ -106,23 +97,13 @@
 
     /* ===== OPEN STATE ===== */
     .envelope.open .letter {
-      transform: translateX(-50%) translateY(-160px) scale(1);
-      z-index: 5;
-    }
-
-    .envelope.open .flap {
-      z-index: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     /* ===== RESPONSIVE ===== */
     @media (min-width: 768px) {
-      .envelope {
-        max-width: 420px;
-        height: 260px;
-      }
-
       .letter {
-        height: 460px;
+        max-width: 380px;
       }
 
       .letter h1 {
@@ -143,7 +124,7 @@
 
     <div class="letter">
       <div class="letter-content">
-        <h1>🎄 Merry Christmas 🎄</h1>
+        <h1>🎄 Giáng Sinh An Lành 🎄</h1>
         <p>
           Chúc bạn một mùa Giáng Sinh thật ấm áp,<br>
           ngập tràn yêu thương, hạnh phúc<br>
