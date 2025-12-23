@@ -1,138 +1,195 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thiệp Giáng Sinh</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp Giáng Sinh</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #ff9ebc, #ffd1dc);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+<style>
+*{box-sizing:border-box}
 
-    /* ===== ENVELOPE ===== */
-    .envelope {
-      position: relative;
-      width: 90vw;
-      max-width: 360px;
-      height: 220px;
-      background: #ff6f91;
-      border-radius: 12px;
-      cursor: pointer;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff9ebc,#ffd1dc);
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+}
 
-    .flap {
-      position: absolute;
-      inset: 0;
-      background: #ff4f7a;
-      clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
-      border-radius: 12px;
-      z-index: 3;
-    }
+/* ===== WRAPPER ===== */
+.scene{
+  position:relative;
+  width:90vw;
+  max-width:360px;
+  height:520px;
+}
 
-    .label {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.1rem;
-      z-index: 4;
-    }
+/* ===== ENVELOPE ===== */
+.envelope{
+  position:absolute;
+  inset:0;
+  height:220px;
+  margin:auto;
+  background:#ff6f91;
+  border-radius:14px;
+  cursor:pointer;
+  transition:transform .7s ease, opacity .5s ease;
+  z-index:3;
+}
 
-    /* ===== LETTER ===== */
-    .letter {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 85vw;
-      max-width: 340px;
-      height: min(80vh, 460px);
-      background: url("bg-pink-christmas.jpg") center/cover no-repeat;
-      border-radius: 18px;
-      padding: 24px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      z-index: 10;
-      transition: transform 0.6s ease;
-      overflow: hidden;
-    }
+.envelope.hide{
+  transform:translateY(160px);
+  opacity:0;
+  pointer-events:none;
+}
 
-    .letter::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 105, 135, 0.7);
-    }
+.flap{
+  position:absolute;
+  inset:0;
+  background:#ff4f7a;
+  clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+  border-radius:14px;
+}
 
-    .letter-content {
-      position: relative;
-      z-index: 1;
-    }
+.label{
+  position:absolute;
+  bottom:18px;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  font-weight:500;
+  letter-spacing:.5px;
+}
 
-    .letter h1 {
-      margin-top: 20px;
-      font-size: 1.8rem;
-    }
+/* ===== LETTER ===== */
+.letter{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -30%) scale(.9);
+  width:100%;
+  max-width:360px;
+  height:460px;
+  background:url("bg-pink-christmas.jpg") center/cover no-repeat;
+  border-radius:20px;
+  padding:26px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  opacity:0;
+  transition:all .8s ease;
+  z-index:2;
+  overflow:hidden;
+}
 
-    .letter p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-top: 20px;
-    }
+.letter.show{
+  opacity:1;
+  transform:translate(-50%, -50%) scale(1);
+}
 
-    /* ===== OPEN STATE ===== */
-    .envelope.open .letter {
-      transform: translate(-50%, -50%) scale(1);
-    }
+.letter::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.78);
+}
 
-    /* ===== RESPONSIVE ===== */
-    @media (min-width: 768px) {
-      .letter {
-        max-width: 380px;
-      }
+/* ===== CONTENT ===== */
+.content{
+  position:relative;
+  z-index:1;
+}
 
-      .letter h1 {
-        font-size: 2.2rem;
-      }
+/* ===== TITLE NEON ===== */
+h1{
+  margin-top:10px;
+  font-family:'Pacifico',cursive;
+  font-size:2.2rem;
+  color:#ff3f81;
+  text-shadow:
+    0 0 6px rgba(255,63,129,.8),
+    0 0 14px rgba(255,63,129,.6),
+    0 0 24px rgba(255,120,170,.6);
+}
 
-      .letter p {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+/* ===== TEXT ===== */
+p{
+  margin-top:22px;
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#5a2a3c;
+  font-weight:400;
+}
+
+/* ===== BUTTON ===== */
+.back{
+  margin-top:28px;
+  padding:10px 26px;
+  border:none;
+  border-radius:24px;
+  background:linear-gradient(135deg,#ff5f9e,#ff3f81);
+  color:#fff;
+  font-weight:500;
+  letter-spacing:.5px;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(255,63,129,.4);
+  transition:.3s;
+}
+
+.back:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(255,63,129,.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-height:600px){
+  .scene{height:480px}
+  .letter{height:420px}
+  h1{font-size:2rem}
+}
+</style>
 </head>
+
 <body>
 
-  <div class="envelope" onclick="this.classList.toggle('open')">
+<div class="scene">
+
+  <div class="envelope" id="env" onclick="openLetter()">
     <div class="flap"></div>
     <div class="label">💌 Nhấn để mở thư</div>
+  </div>
 
-    <div class="letter">
-      <div class="letter-content">
-        <h1>🎄 Giáng Sinh An Lành 🎄</h1>
-        <p>
-          Chúc bạn một mùa Giáng Sinh thật ấm áp,<br>
-          ngập tràn yêu thương, hạnh phúc<br>
-          và những điều ngọt ngào nhất 💖
-        </p>
-      </div>
+  <div class="letter" id="letter">
+    <div class="content">
+      <h1>Giáng Sinh An Lành</h1>
+      <br>
+      <p>
+        Chúc bạn một mùa Giáng Sinh<br>
+        thật ấm áp, bình an<br>
+        và ngập tràn yêu thương 💖
+      </p>
+      <br><br><br>
+      <button class="back" onclick="closeLetter()">Quay lại</button>
     </div>
   </div>
+
+</div>
+
+<script>
+function openLetter(){
+  env.classList.add("hide");
+  letter.classList.add("show");
+}
+function closeLetter(){
+  env.classList.remove("hide");
+  letter.classList.remove("show");
+}
+</script>
 
 </body>
 </html>
